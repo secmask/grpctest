@@ -16,13 +16,13 @@ const (
 
 func main() {
 	var cc int64 = 0
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
-	}
-	defer conn.Close()
 	for i := 0; i < 32; i++ {
 		go func() {
+			conn, err := grpc.Dial(address, grpc.WithInsecure())
+			if err != nil {
+				log.Fatalf("did not connect: %v", err)
+			}
+			defer conn.Close()
 			c := pb.NewGreeterClient(conn)
 			if err != nil {
 				log.Panicln(err)
