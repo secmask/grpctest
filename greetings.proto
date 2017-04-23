@@ -1,0 +1,27 @@
+syntax = "proto3";
+option optimize_for = SPEED;
+package gpc;
+// The greeting service definition.
+service Greeter {
+    // Sends a greeting
+    rpc SayHello (HelloRequest) returns (HelloReply) {}
+    rpc Push(stream Message) returns (Empty) {}
+}
+
+message Message {
+    string channel = 1;
+    string data = 2;
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+    string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+    string message = 1;
+}
+
+message Empty {
+}
